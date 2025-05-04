@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
@@ -5,6 +6,7 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useState , useRef, useEffect } from "react"
 import { vapi } from "@/lib/vapi";
+import { Card } from "@/components/ui/card";
 
 const GenerateProgramPage = () => {
   const [callActive, setCallActive] = useState(false);
@@ -128,6 +130,59 @@ const GenerateProgramPage = () => {
           <p className="text-muted-forground mt-2">
             Have a voice conversation with our AI  assistant to create your personalized fitness plan 
           </p>
+        </div>
+
+        {/* Video Call */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          
+          {/* AI ASSITANT CARD  */}
+          <Card className="bg-card/90 backdrop-blur-sm border border-border overflow-hidden relative">
+            <div className="aspect-video flex flex-col items-center justify-center p-6 relative">
+              <div
+                className={`absolute inset-0 ${
+                  isSpeaking ? "opacity-30" : "opacity-0"
+                } transition-opacity duration-300`}
+              >
+                {/* Voice wave animation when speaking */}
+                <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex justify-center items-center h-20">
+                  {[...Array(5)].map((_, i) => (
+                    <div
+                      key={i}
+                      className={`mx-1 h-16 w-1 bg-primary rounded-full ${
+                        isSpeaking ? "animate-sound-wave" : ""
+                      }`}
+                      style={{
+                        animationDelay: `${i * 0.1}s`,
+                        height: isSpeaking ? `${Math.random() * 50 + 20}%` : "5%",
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* AI animations  */}
+              <div className="size-32 mb-4 relative">
+                <div className={`"absolute inset-0 bg-primary opacity-10 rounded-full blur-lg ${isSpeaking ? "animate-pulse" : ""}`}>
+                  
+                  </div>
+              </div>
+
+              {/* AI Image  */}
+              <div className="relative w-full h-full rounded-full bg-card flex items-center justify-center border border-border overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/10 to-secondary/10">
+                </div>
+                <img src="/ai-avatar.png" alt="AI Assistant" className="w-100 h-100 object-cover" />
+              </div>
+              <h2 className="text-xl font-bold text-foreground mt-2">Nextronix-AI</h2>
+              <p className="text-sm text-muted-foreground mt-2">Fitness & Diet Coach </p>
+            
+              <div className={`mt-4 flex items-center gap-2 px-3 py-1 rounded-full bg-card border border-border ${isSpeaking ? "border-primary" : ""}`}>
+            
+            </div>  
+          </Card>
+
+          {/* User Card  */}
+          <Card></Card>
         </div>
       </div>
     </div>
