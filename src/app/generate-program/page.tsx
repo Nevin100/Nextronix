@@ -177,8 +177,12 @@ const GenerateProgramPage = () => {
               <p className="text-sm text-muted-foreground mt-2">Fitness & Diet Coach </p>
             
               <div className={`mt-4 flex items-center gap-2 px-3 py-1 rounded-full bg-card border border-border ${isSpeaking ? "border-primary" : ""}`}>
-            
-            </div>  
+                <div className={`w-2 h-2 rounded-full ${isSpeaking ? "bg-primary animate-pulse" : "bg-muted"}`} />
+                  
+                <span className="text-xs text-muted-foreground">{
+                  isSpeaking ? "Speaking!!" : callActive ? "Listening" : callEnd ? "Redirected to profile .." : "Waiting .."}</span>
+              </div>  
+              </div>
           </Card>
 
           {/* User Card  */}
